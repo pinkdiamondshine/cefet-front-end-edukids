@@ -1,0 +1,104 @@
+#controles ul {
+  list-style-type: none;
+  padding: 0;
+  transform: translateX(-80%);
+}
+
+#controles ul:hover {
+  transform: translateX(0);
+}
+
+/* Exercício 1: Criar uma transição para quando o mouse estiver em cima dos
+ * botões play/stop (para que o elemento se revele lentamente)
+ */
+#controles ul {
+  transition: all 300ms ease-in-out;
+}
+
+/*
+ * Exercício 2: Você deve implementar uma metáfora visual para cada um dos 4
+ * estados dos animais. Algumas *sugestões*:
+ *   - com-fome: animal piscando (opacidade variando)
+ *   - satisfeito: uma borda verde no animal e o animal fica girando de alegria
+ *   - foi-incomodado: animal fica pulsando (grande/pequeno) e com uma borda
+ *   - atacando: animal dá um salto e cresce, com uma borda vermelha
+ *
+ * O tempo que um animal fica em cada situação é:
+ *   - com-fome: pelo menos 4 segundos
+ *   - satisfeito: 1 segundo
+ *   - foi-incomodado: 1 segundo
+ *   - atacando: 1 segundo
+ */
+.com-fome {
+  opacity: 0.85;
+  border-color: yellow;
+  border-width: 20px;
+  transition: all 100ms ease-in;
+}
+
+@keyframes girar {
+  from { transform: rotate(10deg); }
+  to { transform: rotate(-10deg); }
+}
+
+@keyframes direita {
+  from {transform: translateX(0);}
+  to {transform: translateX(50px);}
+}
+
+@keyframes esquerda {
+  from {transform: translateX(0);}
+  to {transform: translateX(-50px);}
+}
+
+@keyframes direita_cima {
+  from {transform: rotateY(20deg);}
+  to {transform: rotateX(20deg);}
+}
+
+@keyframes cima_esquerda {
+  from {transform: rotateX(20deg);}
+  to {transform: rotateY(-20deg);}
+}
+
+@keyframes esquerda_baixo {
+  from {transform: rotateY(-20deg);}
+  to {transform: rotateX(-20deg);}
+}
+
+@keyframes baixo_direita {
+  from {transform: rotateX(-20deg);}
+  to {transform: rotateY(20deg);}
+}
+
+.satisfeito {
+  border-color: lightgreen;
+  border-width: 20px;
+  width: 110%;
+  transition: all 100ms ease-in;
+  animation: girar 1s ease-in-out 0s 1 normal none;
+}
+
+.foi-incomodado {
+  border-color: orange;
+  border-width: 20px;
+  animation: direita_cima .25s ease-out 0s 1 alternate, cima_esquerda .25s ease-out .25s 1 alternate,
+  esquerda_baixo .25s ease-out .5s 1 alternate, baixo_direita .25s ease-out .75s 1 alternate;
+}
+
+.atacando {
+  border-color: red;
+  border-width: 20px;
+  transition: all 300ms ease-in;
+  width: 150%;
+  animation: direita .25s ease-out 0s 2 alternate, esquerda .25s ease-out .5s 2 alternate none;
+}
+
+
+/* Desafio 2: para efeito 3D, precisa
+ * configurar o perspective do pai do .animal 
+ *
+ */
+.container-animal {
+  perspective: 500px;
+}
